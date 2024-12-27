@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../assets/css/normalize.css" />
+        <link rel="stylesheet" href="../assets/css/base.css" />
+        <script type="module" src="../assets/js/popup.js"></script>
+        <title>Pro WFM API Cookie Manager</title>
+    </head>
+    <body class="bg-primary-700 w-full">
+        <div class="flex flex-col w-full mx-auto justify-center items-center">
+            <div id="popup-content" class="container space-y-4">
+                <h1>Pro WFM Cookie Manager</h1>
+                <!-- Vanity URL -->
+                <div class="flex flex-col space-y-1">
+                    <label for="vanityUrl" class="font-bold">Tenant URL</label>
+                    <div class="flex items-center space-x-4">
+                        <input
+                            type="text"
+                            id="vanityUrl"
+                            placeholder="Vanity URL"
+                            class="rounded-md p-1 w-full"
+                        />
+                        <div id="copyVanityUrl" class="ml-2 cursor-pointer">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                class="inline-block hover:text-primary"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cookies -->
+                <div class="flex flex-col space-y-1">
+                    <label for="authnToken" class="font-bold"
+                        >AUTHN_TOKEN</label
+                    >
+                    <div class="flex items-center space-x-4">
+                        <input
+                            type="text"
+                            id="authnToken"
+                            placeholder="AUTHN_TOKEN Cookie"
+                            class="rounded-md p-1 w-full"
+                        />
+                        <div id="copyAuthnToken" class="ml-2 cursor-pointer">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                class="inline-block hover:text-primary"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <label for="authnSsid" class="font-bold">AUTHN_SSID</label>
+                    <div class="flex items-center space-x-4">
+                        <input
+                            type="text"
+                            id="authnSsid"
+                            placeholder="authn_ssid Cookie"
+                            class="rounded-md p-1 w-full"
+                        />
+                        <div id="copyAuthnSsid" class="ml-2 cursor-pointer">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                class="inline-block hover:text-primary"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V6h2v14h11v2zm4-6V4z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

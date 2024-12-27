@@ -1,0 +1,485 @@
+@use 'fonts' as *;
+@use "sass:list";
+@use "sass:math";
+
+body {
+  font-family: $font-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Color contrast functions
+@function get-brightness($color) {
+  @return ((red($color) * 299) + (green($color) * 587) + (blue($color) * 114)) / 1000;
+}
+
+@function get-contrast-color($color) {
+  $brightness: get-brightness($color);
+  @return if($brightness > 186, #000000, #ffffff);
+}
+
+// Color palette
+$mountain-meadow: (
+  '50': #B1F8E1,
+  '100': #9EF7D9,
+  '200': #79F3CB,
+  '300': #53F0BC,
+  '400': #2EEDAE,
+  '500': #13DF9B,
+  '600': #10B981,
+  '700': #0C855D,
+  '800': #075239,
+  '900': #031E15,
+  '950': #000403
+);
+
+$colors: (
+  'primary': map-get($mountain-meadow, '500'),
+  'primary-50': map-get($mountain-meadow, '50'),
+  'primary-100': map-get($mountain-meadow, '100'),
+  'primary-200': map-get($mountain-meadow, '200'),
+  'primary-300': map-get($mountain-meadow, '300'),
+  'primary-400': map-get($mountain-meadow, '400'),
+  'primary-500': map-get($mountain-meadow, '500'),
+  'primary-600': map-get($mountain-meadow, '600'),
+  'primary-700': map-get($mountain-meadow, '700'),
+  'primary-800': map-get($mountain-meadow, '800'),
+  'primary-900': map-get($mountain-meadow, '900'),
+  'primary-950': map-get($mountain-meadow, '950'),
+  'secondary': #4A90E2,
+  'success': #28A745,
+  'danger': #DC3545,
+  'warning': #FFC107,
+  'info': #17A2B8,
+  'light': #F8F9FA,
+  'dark': #343A40
+);
+
+// Generate color utilities
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color;
+    color: get-contrast-color($color);
+  }
+  .text-#{$name} {
+    color: $color;
+  }
+}
+
+// Spacing scale (similar to Tailwind)
+$spacing: (
+  0: 0,
+  1: 0.25rem,
+  // 4px
+  2: 0.5rem,
+  // 8px
+  3: 0.75rem,
+  // 12px
+  4: 1rem,
+  // 16px
+  5: 1.25rem,
+  // 20px
+  6: 1.5rem,
+  // 24px
+  8: 2rem,
+  // 32px
+  10: 2.5rem,
+  // 40px
+  12: 3rem // 48px,
+);
+
+$spacing-axes: (
+  'x': ('left', 'right'),
+  'y': ('top', 'bottom')
+);
+
+// Padding directions
+$directions: (
+  "": "",
+  // all sides
+  "t": "-top",
+  // top
+  "r": "-right",
+  // right
+  "b": "-bottom",
+  // bottom
+  "l": "-left" // left,
+);
+
+// Width scale
+$widths: (
+  '0': 0,
+  '1\\/4': 25%,
+  '1\\/3': 33.3333%,
+  '1\\/2': 50%,
+  '2\\/3': 66.6667%,
+  '3\\/4': 75%,
+  'full': 100%,
+  'screen': 100vw,
+  'auto': auto,
+  '1': 0.25rem,  // 4px
+  '2': 0.5rem,   // 8px
+  '3': 0.75rem,  // 12px
+  '4': 1rem,     // 16px
+  '5': 1.25rem,  // 20px
+  '6': 1.5rem,   // 24px
+  '8': 2rem,     // 32px
+  '10': 2.5rem,  // 40px
+  '12': 3rem     // 48px
+);
+
+// Generate background and text color utilities
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color;
+    color: get-contrast-color($color);
+  }
+}
+
+// Generate width utilities
+@each $key, $value in $widths {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+// Generate padding utilities
+@each $space-key, $space-value in $spacing {
+  @each $direction-key, $direction-value in $directions {
+    .p#{$direction-key}-#{$space-key} {
+      padding#{$direction-value}: $space-value;
+    }
+  }
+}
+
+// Font size scale (rem)
+$font-sizes: (
+  'xs': 0.75rem,    // 12px
+  'sm': 0.875rem,   // 14px
+  'base': 1rem,     // 16px
+  'lg': 1.125rem,   // 18px
+  'xl': 1.25rem,    // 20px
+  '2xl': 1.5rem,    // 24px
+  '3xl': 1.875rem,  // 30px
+  '4xl': 2.25rem,   // 36px
+);
+
+// Line heights
+$line-heights: (
+  'none': 1,
+  'tight': 1.25,
+  'normal': 1.5,
+  'loose': 2
+);
+
+$display-style: (
+  'block': block,
+  'inline-block': inline-block,
+  'inline': inline,
+);
+
+// Generate display utilities
+@each $key, $value in $display-style {
+  .#{$key} {
+    display: $value;
+  }
+}
+
+// Text alignments
+$text-aligns: (left, center, right, justify);
+
+// Font utilities generation
+@each $name, $size in $font-sizes {
+  .text-#{$name} {
+    font-size: $size;
+  }
+}
+
+@each $name, $height in $line-heights {
+  .leading-#{$name} {
+    line-height: $height;
+  }
+}
+
+@each $align in $text-aligns {
+  .text-#{$align} {
+    text-align: $align;
+  }
+}
+
+// Font weight utilities
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+
+// Text decoration
+.underline { text-decoration: underline; }
+.no-underline { text-decoration: none; }
+
+// Border radius scale
+$radius: (
+  'none': 0,
+  'sm': 0.125rem,    // 2px
+  'md': 0.25rem,     // 4px
+  'lg': 0.5rem,      // 8px
+  'xl': 0.75rem,     // 12px
+  '2xl': 1rem,       // 16px
+  'full': 9999px
+);
+
+// Border radius directions
+$radius-directions: (
+  '': '',            // all corners
+  't': 'top',        // top
+  'r': 'right',      // right
+  'b': 'bottom',     // bottom
+  'l': 'left',       // left
+  'tl': 'top-left',  // top-left
+  'tr': 'top-right', // top-right
+  'br': 'bottom-right', // bottom-right
+  'bl': 'bottom-left'  // bottom-left
+);
+
+// Generate border radius utilities
+@each $size-key, $size-value in $radius {
+  @each $direction-key, $direction-value in $radius-directions {
+    .rounded#{if($direction-key != '', '-' + $direction-key, '')}-#{$size-key} {
+      @if $direction-value == '' {
+        border-radius: $size-value;
+      } @else if $direction-value == 'top' {
+        border-top-left-radius: $size-value;
+        border-top-right-radius: $size-value;
+      } @else if $direction-value == 'right' {
+        border-top-right-radius: $size-value;
+        border-bottom-right-radius: $size-value;
+      } @else if $direction-value == 'bottom' {
+        border-bottom-left-radius: $size-value;
+        border-bottom-right-radius: $size-value;
+      } @else if $direction-value == 'left' {
+        border-top-left-radius: $size-value;
+        border-bottom-left-radius: $size-value;
+      } @else {
+        border-#{$direction-value}-radius: $size-value;
+      }
+    }
+  }
+}
+
+// Flex utilities
+// Flex toggle
+$flex-toggle: (
+  'flex': flex,
+  'inline-flex': inline-flex
+);
+
+@each $key, $value in $flex-toggle {
+  .#{$key} {
+    display: $value;
+  }
+}
+
+// Flex directions
+$flex-directions: (
+  'row': row,
+  'row-reverse': row-reverse,
+  'col': column,
+  'col-reverse': column-reverse
+);
+
+// Flex wraps
+$flex-wraps: (
+  'wrap': wrap,
+  'wrap-reverse': wrap-reverse,
+  'nowrap': nowrap
+);
+
+// Justify content
+$justify-content: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly
+);
+
+// Align items
+$align-items: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'baseline': baseline,
+  'stretch': stretch
+);
+
+// Align self
+$align-self: (
+  'auto': auto,
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'baseline': baseline,
+  'stretch': stretch
+);
+
+// Generate flex direction utilities
+@each $key, $value in $flex-directions {
+  .flex-#{$key} {
+    flex-direction: $value;
+  }
+}
+
+// Generate flex wrap utilities
+@each $key, $value in $flex-wraps {
+  .flex-#{$key} {
+    flex-wrap: $value;
+  }
+}
+
+// Generate justify content utilities
+@each $key, $value in $justify-content {
+  .justify-#{$key} {
+    justify-content: $value;
+  }
+}
+
+// Generate align items utilities
+@each $key, $value in $align-items {
+  .items-#{$key} {
+    align-items: $value;
+  }
+}
+
+// Generate align self utilities
+@each $key, $value in $align-self {
+  .self-#{$key} {
+    align-self: $value;
+  }
+}
+
+// Generate gap utilities
+@each $space-key, $space-value in $spacing {
+  .gap-#{$space-key} {
+    gap: $space-value;
+  }
+}
+
+// Generate row-gap utilities
+@each $space-key, $space-value in $spacing {
+  .row-gap-#{$space-key} {
+    row-gap: $space-value;
+  }
+}
+
+// Generate column-gap utilities
+@each $space-key, $space-value in $spacing {
+  .col-gap-#{$space-key} {
+    column-gap: $space-value;
+  }
+}
+
+// Spacing utilities
+// Generate spacing utilities
+@each $axis, $directions in $spacing-axes {
+  @each $space-key, $space-value in $spacing {
+    .space-#{$axis}-#{$space-key} > * + * {
+      @each $direction in $directions {
+        margin-#{$direction}: $space-value;
+      }
+    }
+  }
+}
+
+// Generate margin utilities
+@each $space-key, $space-value in $spacing {
+  @each $direction-key, $direction-value in $directions {
+    .m#{$direction-key}-#{$space-key} {
+      margin#{$direction-value}: $space-value;
+    }
+  }
+}
+
+// Generate margin utilities using the axes
+@each $axis, $directions in $spacing-axes {
+  @each $space-key, $space-value in $spacing {
+    .m#{$axis}-#{$space-key} {
+      @each $direction in $directions {
+        margin-#{$direction}: $space-value;
+      }
+    }
+  }
+}
+
+// Margin auto utilities
+.m-auto {
+  margin: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.mb-auto {
+  margin-bottom: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @media (min-width: 640px) {
+    max-width: 640px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 1280px;
+  }
+
+  @media (min-width: 1536px) {
+    max-width: 1536px;
+  }
+}
+
+// Generate hover background and text color utilities
+@each $name, $color in $colors {
+  .hover\:bg-#{$name}:hover {
+    background-color: $color;
+    color: get-contrast-color($color);
+  }
+  .hover\:text-#{$name}:hover {
+    color: $color;
+  }
+}

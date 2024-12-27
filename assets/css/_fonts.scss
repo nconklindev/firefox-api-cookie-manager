@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+$font-primary: 'Public Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+$font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
+
+// Export variables
+:export {
+    fontPrimary: $font-primary;
+    fontMono: $font-mono;
+}
